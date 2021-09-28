@@ -15,7 +15,7 @@ const SuperheroesCard = ({ superHeroes }) => {
                     <Col>
                         <Card key={superheroe.id} border={superheroe.biography.alignment === "good" ? "success" : "danger"} className="mt-5" style={{ width: '12rem' }}>
                             <Card.Header className='text-center font-weight-bold'>{superheroe.name}</Card.Header>
-                            <Card.Img variant='top' src="holder.js/100px180" src={superheroe.image.url} className="card-img"/>
+                            <Card.Img variant='top' src={superheroe.image.url} className="card-img"/>
                             <ListGroup className="list-group-flush">
                                <ListGroupItem>
                                <strong>Inteligencia:</strong> { superheroe.powerstats.intelligence !== "null" ?

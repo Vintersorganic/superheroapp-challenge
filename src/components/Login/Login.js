@@ -3,38 +3,8 @@ import {Form, Button, Container, Row, Col, Alert, Card} from 'react-bootstrap'
 import loginIcon from '../../images/login-icon2.png'
 import loginPageImage from '../../images/superheroes-6.png'
 import './login.css'
-import { useState } from 'react'
-import {useHistory } from 'react-router-dom'
-import axios from 'axios'
 
-const Login = ( {user, setUser}) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [message, setMessage] = useState(null)
-    const history = useHistory()
-    
-    const handleLogin = async (e) => {
-        e.preventDefault()
-        try {
-            const response = await axios.post('http://challenge-react.alkemy.org/', {email, password})
-            setUser(response.data)
-            window.localStorage.setItem(
-                'loggedSuperheroAppUser', JSON.stringify(user.token)
-              ) 
-            setEmail('')
-            setPassword('')
-            history.push('/home')
-            
-        } catch (exception) {
-            setMessage('Mail y/o password incorrectos.')
-            console.log(user, "USER")
-            setTimeout(() => {
-                setMessage(null)
-            }, 3000)
-        }
-        
-    }
-
+const Login = ( {setPassword, setEmail, handleLogin, message}) => {
 
     return (
         <Container className="mt-5">
