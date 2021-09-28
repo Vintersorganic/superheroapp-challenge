@@ -6,16 +6,20 @@ import {
 import SuperheroesCard from "./components/SuperheroesCard/SuperheroesCard"
 import Login from "./components/Login/Login";
 import HeroNavbar from "./components/Navbar/HeroNavbar"
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 
 function App() {
   const [superHeroes, setSuperheroes] = useState([])
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const handleSearch = (value) => {
+    setLoading(true)
     axios
           .get(`/api/10158026026342484/search/${value}`)
           .then(response => {
-            setSuperheroes(response.data.results)         
+            setSuperheroes(response.data.results)
+            setLoading(false)         
           })
   }
 
@@ -48,7 +52,7 @@ function App() {
               </div>
             </Route>
             <Route path='/heroes'>
-              <SuperheroesCard superHeroes={superHeroes}/>
+              {loading ? <LoadingSpinner /> : <SuperheroesCard superHeroes={superHeroes}/>}
             </Route>
           </Switch>
       </div>

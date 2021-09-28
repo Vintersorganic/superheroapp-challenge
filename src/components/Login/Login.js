@@ -10,7 +10,6 @@ import axios from 'axios'
 const Login = ( {user, setUser}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
     const [message, setMessage] = useState(null)
     const history = useHistory()
     
