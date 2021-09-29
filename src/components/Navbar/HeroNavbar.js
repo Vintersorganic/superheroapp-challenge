@@ -16,10 +16,10 @@ const HeroNavbar = ({ handleSearch, setUser}) => {
               navbarScroll
             >
               <Nav.Link href="/home">Equipo</Nav.Link>
-              <Nav.Link href="/about">Link</Nav.Link>
+              <Search handleSearch={handleSearch}/>
             </Nav>
             <LogoutButton setUser={setUser}/>
-            <Search handleSearch={handleSearch}/>
+            
           </Navbar.Collapse>
         </Navbar>
     )

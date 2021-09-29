@@ -8,7 +8,7 @@ const LogoutButton = ( { setUser }) => {
                 window.localStorage.removeItem('loggedSuperheroAppUser')
                 setUser(null)
                 }}>
-             Logout
+             Desconectarse  
              </Button>
         
     )

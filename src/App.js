@@ -7,6 +7,7 @@ import SuperheroesCard from "./components/SuperheroesCard/SuperheroesCard"
 import Login from "./components/Login/Login";
 import HeroNavbar from "./components/Navbar/HeroNavbar"
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
+import HeroTeam from "./components/HeroTeam/HeroTeam";
 
 function App() {
   const [superHeroes, setSuperheroes] = useState([])
@@ -23,12 +24,13 @@ function App() {
   }, [])
 
   const handleSearch = (value) => {
-    setLoading(true)
+    setLoading(true) 
     axios
           .get(`/api/10158026026342484/search/${value}`)
           .then(response => {
             setSuperheroes(response.data.results)
-            setLoading(false)         
+            setLoading(false)   
+            console.log(user, "USER HS")      
           })
   }
 
@@ -57,6 +59,30 @@ function App() {
         }     
     }
 
+    
+    const [teamHeroes, setTeamHeroes] = useState([])
+ 
+    const addHeroes = async (hero) => {
+      const bad = teamHeroes.filter(h => h.biography.alignment === "bad").length
+      const good = teamHeroes.filter(h => h.biography.alignment === "good").length
+        if (teamHeroes.length < 1 ) {
+          setTeamHeroes(teamHeroes.concat(hero))
+        }
+        else if (bad === 3 && hero.biography.alignment === "bad") {  
+          alert("MALO MUCHO!")
+        }
+        else if (good === 3  && hero.biography.alignment === "good") {
+          alert("BUENO MUCHO")
+        }
+        else {
+          (teamHeroes.find(h => h.id === hero.id) === undefined && teamHeroes.length < 7)
+         ? setTeamHeroes(teamHeroes.concat(hero)) 
+         : alert(`¡${hero.name} ya está en tu equipo!`)
+        }   
+    } 
+
+    console.log(teamHeroes, "ASDLK:ASD")
+
     if (user === null) {
       return (
       <Switch className='container'>
@@ -72,12 +98,10 @@ function App() {
 
         <Switch>
             <Route path='/home'>
-              <div>
-                <p>HOLAAA</p>
-              </div>
+              <HeroTeam teamHeroes={teamHeroes}/>
             </Route>
             <Route path='/heroes'>
-              {loading ? <LoadingSpinner /> : <SuperheroesCard superHeroes={superHeroes}/>}
+              {loading ? <LoadingSpinner /> : <SuperheroesCard addHeroes={addHeroes} superHeroes={superHeroes}/>}
             </Route>
           </Switch>
       </div>

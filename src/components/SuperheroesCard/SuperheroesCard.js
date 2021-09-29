@@ -3,17 +3,16 @@ import { Card, Row, Col, ListGroup, ListGroupItem, Button, ButtonGroup } from 'r
 import './superheroescard.css'
 
 
-const SuperheroesCard = ({ superHeroes }) => {
+const SuperheroesCard = ({ superHeroes, addHeroes }) => {
     if (!superHeroes) {
         return null
     }
     return (
         <Row xs={1} md={2} lg={4} className="card-row"> 
             {superHeroes.map(superheroe =>{
-                console.log(superheroe.biography.alignment, "ALIGMENT");
                 return  (
-                    <Col>
-                        <Card key={superheroe.id} border={superheroe.biography.alignment === "good" ? "success" : "danger"} className="mt-5" style={{ width: '12rem' }}>
+                    <Col key={Number(superheroe.id)}>
+                        <Card border={superheroe.biography.alignment === "good" ? "success" : "danger"} className="mt-5" style={{ width: '12rem' }}>
                             <Card.Header className='text-center font-weight-bold'>{superheroe.name}</Card.Header>
                             <Card.Img variant='top' src={superheroe.image.url} className="card-img"/>
                             <ListGroup className="list-group-flush">
@@ -48,10 +47,10 @@ const SuperheroesCard = ({ superHeroes }) => {
                                     }
                                </ListGroupItem>      
                             </ListGroup>
-                            <ButtonGroup className='mt-0 mr-0'>
-                            <Button variant="outline-dark">Agregar</Button>
-                            <Button variant="outline-info">Detalles</Button>
-                            </ButtonGroup>
+                            
+                            <Button variant="outline-info" onClick={() => addHeroes(superheroe)}>Agregar</Button>
+                            {/* <Button variant="outline-info">Detalles</Button> */}
+                          
                         </Card>
                     </Col>
                         )
