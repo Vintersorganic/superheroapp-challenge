@@ -3,51 +3,34 @@ import { Table, Alert } from 'react-bootstrap'
 
 
 const Powerstats = ({ teamHeroes }) => {
-  let combat = 0
-  let durability = 0
-  let intelligence = 0
-  let power = 0
-  let speed = 0
-  let strength = 0
-  if (teamHeroes.length > 0 ) {
-    const filteredCombat = teamHeroes
-      .filter(heroe => heroe.powerstats.combat !== 'null')
-    combat =   filteredCombat.map(item => Number(item.powerstats.combat))
-      .reduce((a,b) => a + b)/filteredCombat.length
-
-    const filteredDurability = teamHeroes
-      .filter(heroe => heroe.powerstats.durability !== 'null')
-    durability=     filteredDurability.map(item => Number(item.powerstats.durability))
-      .reduce((a,b) => a + b)/filteredDurability.length
-
-    const filteredIntelligence = teamHeroes.filter(heroe => heroe.powerstats.intelligence !== 'null')
-    intelligence = filteredIntelligence.map(item => Number(item.powerstats.intelligence))
-      .reduce((a,b) => a + b)/filteredIntelligence.length
-
-    const filteredPower = teamHeroes.filter(heroe => heroe.powerstats.power !== 'null')
-    power  =  filteredPower.map(item => Number(item.powerstats.power))
-      .reduce((a,b) => a + b)/filteredPower.length
-
-    const  filteredSpeed = teamHeroes
-      .filter(heroe => heroe.powerstats.speed !== 'null')
-    speed=   filteredSpeed.map(item => Number(item.powerstats.speed))
-      .reduce((a,b) => a + b)/filteredSpeed.length
-
-    const   filteredStrength = teamHeroes
-      .filter(heroe => heroe.powerstats.strength !== 'null')
-    strength= filteredStrength.map(item => Number(item.powerstats.strength))
-      .reduce((a,b) => a + b)/filteredStrength.length
-
+  if (teamHeroes.length < 0) {
+    return null
   }
 
-  const powerstatsAverageObject = { inteligencia: intelligence,
-    resistencia: durability, poder: power, combate: combat, velocidad: speed,
-    fuerza: strength }
-  const d = Object.entries(powerstatsAverageObject).sort((a, b) => b[1] - a[1])
+  const filteredPowerstatAverage = (heroTeam, powerstat) => {
+    const filteredPowerstat = heroTeam.filter(da => da.powerstats[powerstat] !== 'null')
+    if (filteredPowerstat.length < 1) {
+      return 0
+    }
+    return filteredPowerstat.map(item => Number(item.powerstats[powerstat]))
+      .reduce((a,b) => a + b)/filteredPowerstat.length
+  }
+
+  const powerstatsAverageObject = {
+    inteligencia: filteredPowerstatAverage(teamHeroes, 'intelligence'),
+    resistencia: filteredPowerstatAverage(teamHeroes, 'durability'),
+    poder: filteredPowerstatAverage(teamHeroes, 'power'),
+    combate: filteredPowerstatAverage(teamHeroes, 'combat'),
+    velocidad: filteredPowerstatAverage(teamHeroes, 'speed'),
+    fuerza: filteredPowerstatAverage(teamHeroes, 'strength') }
+
+  const sortedPowerstats = Object.entries(powerstatsAverageObject).sort((a, b) => b[1] - a[1])
 
   return (
     <div>
-      <h2 className='text-center' style={{ marginTop: 70 }}>¡Tu equipo{teamHeroes.length < 1 ? '!' : ` es de ${d[0][0]}!`} </h2>
+      <h2 className='text-center' style={{ marginTop: 70 }}>
+        ¡Tu equipo{teamHeroes.length < 1 ? '!' : ` es de ${sortedPowerstats[0][0]}!`}
+      </h2>
       {teamHeroes.length < 1 && <Alert variant="danger" className='mt-3 text-center'>
                   ¡Tenés que agregar miembros al equipo! </Alert>
       }
@@ -64,12 +47,12 @@ const Powerstats = ({ teamHeroes }) => {
         </thead>
         <tbody>
           <tr className="text-center">
-            <th>{Math.round(combat)}</th>
-            <th>{Math.round(durability)}</th>
-            <th>{Math.round(intelligence)}</th>
-            <th>{Math.round(power)}</th>
-            <th>{Math.round(speed)}</th>
-            <th>{Math.round(strength)}</th>
+            <th>{Math.round(powerstatsAverageObject.combate)}</th>
+            <th>{Math.round(powerstatsAverageObject.resistencia)}</th>
+            <th>{Math.round(powerstatsAverageObject.inteligencia)}</th>
+            <th>{Math.round(powerstatsAverageObject.poder)}</th>
+            <th>{Math.round(powerstatsAverageObject.velocidad)}</th>
+            <th>{Math.round(powerstatsAverageObject.fuerza)}</th>
           </tr>
         </tbody>
       </Table>

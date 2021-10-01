@@ -5,8 +5,6 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 const HeroTeam = ({ teamHeroes, setTeamHeroes }) => {
 
-  console.log(teamHeroes)
-
   const deleteHeroes = (id) => {
 
     const updatedHeroesTeam = teamHeroes.filter(teamHeroe => teamHeroe.id !== id )

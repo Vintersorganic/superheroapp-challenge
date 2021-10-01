@@ -7,7 +7,7 @@ import * as yup from 'yup'
 
 import './login.css'
 
-const Login = ( { message, handleLogin, setEmail, setPassword }) => {
+const Login = ( { message, handleLogin }) => {
 
   const schema = yup.object().shape({
     email: yup.string().email('Formato inválido de email').required('Es necesario ingresar un email válido.'),
@@ -27,23 +27,23 @@ const Login = ( { message, handleLogin, setEmail, setPassword }) => {
 
             <Formik
               validationSchema={schema}
-              onSubmit={console.log}
+              onSubmit={handleLogin}
               initialValues={{
                 email:'',
                 password: ''
               }}
             >
 
-              {({ handleChange, values, touched, errors, isValid }) => (
-                <Form noValidate onSubmit={handleLogin}>
+              {({ handleSubmit, handleChange, values, touched, errors, isValid }) => (
+                <Form noValidate onSubmit={handleSubmit}>
                   <Form.Group controlId="validationFormik01" >
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
-                      name={setEmail(values.email)}
+                      name="email"
                       type="email"
                       value={values.email}
                       placeholder="Ingresá tu email"
-                      onChange={handleChange('email')}
+                      onChange={handleChange}
                       isValid={touched.email && !errors.email}
                       isInvalid={!!errors.email}
                     />
@@ -54,10 +54,10 @@ const Login = ( { message, handleLogin, setEmail, setPassword }) => {
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
                       type="password"
-                      name={setPassword(values.password)}
+                      name="password"
                       value={values.password}
                       placeholder="Ingresá tu password"
-                      onChange={handleChange('password')}
+                      onChange={handleChange}
                       isValid={touched.password && !errors.password}
                       isInvalid={!!errors.password}
                     />

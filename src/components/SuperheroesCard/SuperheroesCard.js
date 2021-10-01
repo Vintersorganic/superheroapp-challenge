@@ -29,8 +29,6 @@ const SuperheroesCard = ({ superHeroes, teamHeroes, setTeamHeroes, message }) =>
     }
   }
 
-  console.log(teamHeroes, 'TEAM HEROES')
-
   return (
     <div className='container'>
       {message && <p>A:SDKASDKASD</p>}

@@ -18,8 +18,6 @@ function App() {
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
   const [teamHeroes, setTeamHeroes] = useState([])
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   let history = useHistory()
 
 
@@ -31,23 +29,19 @@ function App() {
     }
   }, [])
 
-  const handleLogin = async (e) => {
-    e.preventDefault()
+  const handleLogin = async (values) => {
     try {
       setLoading(true)
-      const response = await axios.post('http://challenge-react.alkemy.org/', { email, password })
+      const response = await axios.post('http://challenge-react.alkemy.org/', values)
       window.localStorage.setItem(
         'loggedSuperheroAppUser', JSON.stringify(response.data.token)
       )
       setUser(response.data)
       setLoading(false)
-      setEmail('')
-      setPassword('')
       history.push('/home')
 
     } catch (exception) {
       setMessage('Mail y/o password incorrectos.')
-      console.log(user, 'USER')
       setLoading(false)
       setTimeout(() => {
         setMessage(null)
@@ -66,9 +60,6 @@ function App() {
               : <Login handleLogin={handleLogin}
                 setMessage={setMessage}
                 message={message}
-                setPassword={setPassword}
-                setEmail={setEmail}
-                email={email}
               />
           }
         </Route>
