@@ -17,11 +17,11 @@ const HeroTeam = ({ teamHeroes, setTeamHeroes }) => {
 
   return (
     <div >
-      <Row xs={1} md={2} lg={6} className="card-row mb-3" style={{ margin: 'auto' }}>
+      <Row xs={1} md={2} lg={6} className="card-row mb-3" style={{ margin: 'auto'  }}>
         {teamHeroes.map(superheroe => {
           return  (
-            <Col key={Number(superheroe.id)}>
-              <Card border={superheroe.biography.alignment === 'good' ? 'success' : 'danger'} className="mt-3 single-card" >
+            <Col xs={12} sm={6} md={4} lg={2}  key={Number(superheroe.id)}>
+              <Card border={superheroe.biography.alignment === 'good' ? 'success' : 'danger'} className="mt-2 single-card" >
                 <Card.Header className='text-center font-weight-bold'>{superheroe.name}</Card.Header>
                 <Card.Img variant='top' src={superheroe.image.url} className="card-img"/>
                 <ListGroup className="list-group-flush">

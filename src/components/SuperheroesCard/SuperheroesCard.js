@@ -37,7 +37,7 @@ const SuperheroesCard = ({ superHeroes, teamHeroes, setTeamHeroes, message }) =>
         {superHeroes.map(superheroe => {
           return  (
             <Col key={Number(superheroe.id)}>
-              <Card border={superheroe.biography.alignment === 'good' ? 'success' : 'danger'} className="mt-5" style={{ width: '12rem' }}>
+              <Card border={superheroe.biography.alignment === 'good' ? 'success' : 'danger'} className="mt-5" style={{ width: '12rem', margin: 'auto' }}>
                 <Card.Header className='text-center font-weight-bold'>{superheroe.name}</Card.Header>
                 <Card.Img variant='top' src={superheroe.image.url} className="card-img"/>
                 <Button variant="outline-info" onClick={() => addHeroes(superheroe)}>Agregar</Button>
