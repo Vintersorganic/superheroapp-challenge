@@ -1,0 +1,18 @@
+.heroteam-header {
+    margin-top: 300px !important;
+}
+
+.heroteam-container {
+    margin: auto !important;
+}
+
+.card-img {
+    margin: auto;
+    width: 170px;
+    height: 220px;
+}
+
+.single-card:hover {
+    transform: scale(1.1);
+    transition: 1s;
+}

@@ -1,8 +1,8 @@
 .loginIcon-img {
     margin: auto;
-    width: 130px;
-    height: 130px;
-    margin-bottom: 2rem;
+    width: 130px !important ;
+    height: 130px !important;
+    margin-bottom: 2rem !important;
 }
 
 .btn-primary {
