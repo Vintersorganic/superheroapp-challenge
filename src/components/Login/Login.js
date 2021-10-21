@@ -1,13 +1,23 @@
 import React from 'react'
 import { Form, Button, Container, Row, Col, Alert, Card } from 'react-bootstrap'
+import { useHistory } from 'react-router'
 import loginIcon from '../../images/login-icon2.png'
 import loginPageImage from '../../images/superheroes-6.png'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { useDispatch } from 'react-redux'
+import { login } from '../../reducers/loginReducer'
 
 import './login.css'
 
-const Login = ( { message, handleLogin }) => {
+const Login = ( { message }) => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+
+  const handleLogin = (credentials) => {
+    dispatch(login(credentials))
+    history.push('/home')
+  }
 
   const schema = yup.object().shape({
     email: yup.string().email('Formato inválido de email').required('Es necesario ingresar un email válido.'),

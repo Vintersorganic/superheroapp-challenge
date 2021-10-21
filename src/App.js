@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
-  Switch, Route, useHistory
+  Switch, Route
 } from 'react-router-dom'
 import { Alert } from 'react-bootstrap'
 import SuperheroesCard from './components/SuperheroesCard/SuperheroesCard'
@@ -10,45 +11,41 @@ import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import HeroTeam from './components/HeroTeam/HeroTeam'
 import HeroeDetails from './components/HeroeDetails/HeroeDetails'
 import Powerstats from './components/Powerstats/Powerstats'
-import loginService from './services/login'
+import { initializeUser } from './reducers/loginReducer'
 
 function App() {
   const [superHeroes, setSuperheroes] = useState([])
   const [loading, setLoading] = useState(false)
-  const [user, setUser] = useState(null)
+  const [e, setUser] = useState(null)
   const [message, setMessage] = useState(null)
   const [teamHeroes, setTeamHeroes] = useState([])
-  let history = useHistory()
-
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedSuperheroAppUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-    }
-  }, [])
+    dispatch(initializeUser())
+  }, [dispatch])
 
-  const handleLogin = async (credentials) => {
-    try {
-      setLoading(true)
-      const user = await loginService.login(credentials)
-      window.localStorage.setItem(
-        'loggedSuperheroAppUser', JSON.stringify(user.token)
-      )
-      setUser(user)
-      setLoading(false)
-      history.push('/home')
+  // const handleLogin = async (credentials) => {
+  //   try {
+  //     setLoading(true)
+  //     const user = await loginService.login(credentials)
+  //     window.localStorage.setItem(
+  //       'loggedSuperheroAppUser', JSON.stringify(user.token)
+  //     )
+  //     setUser(user)
+  //     setLoading(false)
+  //     history.push('/home')
 
-    } catch (exception) {
-      setMessage('Mail y/o password incorrectos.')
-      setLoading(false)
-      setTimeout(() => {
-        setMessage(null)
-      }, 3000)
-    }
-  }
-
+  //   } catch (exception) {
+  //     setMessage('Mail y/o password incorrectos.')
+  //     setLoading(false)
+  //     setTimeout(() => {
+  //       setMessage(null)
+  //     }, 3000)
+  //   }
+  // }
+  console.log(e)
 
   if (user === null) {
     return (
@@ -57,7 +54,7 @@ function App() {
           {
             loading ?
               <LoadingSpinner />
-              : <Login handleLogin={handleLogin}
+              : <Login
                 setMessage={setMessage}
                 message={message}
               />

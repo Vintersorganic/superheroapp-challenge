@@ -1,13 +1,19 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import { logout } from '../../reducers/loginReducer'
+import { useDispatch } from 'react-redux'
+
 
 const LogoutButton = ( { setUser }) => {
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+    setUser(null)
+  }
   return (
 
-    <Button onClick={() => {
-      window.localStorage.removeItem('loggedSuperheroAppUser')
-      setUser(null)
-    }}>
+    <Button onClick={handleLogout}>
              Desconectarse
     </Button>
 
