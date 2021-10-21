@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, FormControl, Button } from 'react-bootstrap'
-import axios from 'axios'
+import heroesService from '../../services/heroes'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
@@ -18,12 +18,13 @@ const Search = ( { setSuperheroes, setLoading, setMessage }) => {
   const handleSearch = (values) => {
     history.push('/heroes')
     setLoading(true)
-    axios
-      .get(`/api/10158026026342484/search/${values.search}`)
-      .then(response => {
-        setSuperheroes(response.data.results)
+    heroesService
+      .getHeroes(values.search)
+      .then(data => {
+        console.log(data)
+        setSuperheroes(data.results)
         setLoading(false)
-        setMessage(response.data.response)
+        setMessage(data.response)
         setTimeout(() => {
           setMessage(null)
         }, 4000)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, Row, Col, Image, Table } from 'react-bootstrap'
-import axios from 'axios'
+import heroesService from '../../services/heroes'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 const HeroeDetails = ({ setLoading, loading }) => {
@@ -10,10 +10,10 @@ const HeroeDetails = ({ setLoading, loading }) => {
 
   useEffect(() => {
     setLoading(true)
-    axios
-      .get(`/api/10158026026342484/${id}`)
-      .then((response) => {
-        setHeroDetails(response.data)
+    heroesService
+      .getIndividualHeroe(id)
+      .then((data) => {
+        setHeroDetails(data)
       })
       .finally(() => {
         setLoading(false)

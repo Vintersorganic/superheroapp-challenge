@@ -10,7 +10,7 @@ import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 import HeroTeam from './components/HeroTeam/HeroTeam'
 import HeroeDetails from './components/HeroeDetails/HeroeDetails'
 import Powerstats from './components/Powerstats/Powerstats'
-import axios from 'axios'
+import loginService from './services/login'
 
 function App() {
   const [superHeroes, setSuperheroes] = useState([])
@@ -29,14 +29,14 @@ function App() {
     }
   }, [])
 
-  const handleLogin = async (values) => {
+  const handleLogin = async (credentials) => {
     try {
       setLoading(true)
-      const response = await axios.post('http://challenge-react.alkemy.org/', values)
+      const user = await loginService.login(credentials)
       window.localStorage.setItem(
-        'loggedSuperheroAppUser', JSON.stringify(response.data.token)
+        'loggedSuperheroAppUser', JSON.stringify(user.token)
       )
-      setUser(response.data)
+      setUser(user)
       setLoading(false)
       history.push('/home')
 
