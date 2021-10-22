@@ -1,7 +1,9 @@
 import React from 'react'
 import { Table, Alert } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 
-const Powerstats = ({ teamHeroes }) => {
+const Powerstats = () => {
+  const teamHeroes = useSelector(state => state.teamheroes)
   if (teamHeroes.length < 0) {
     return null
   }

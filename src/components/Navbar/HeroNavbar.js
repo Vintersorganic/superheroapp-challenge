@@ -5,7 +5,8 @@ import LogoutButton from '../LogoutButton/LogoutButton'
 import { LinkContainer } from 'react-router-bootstrap'
 import './heronavbar.css'
 
-const HeroNavbar = ({ setLoading, setUser, user, setSuperheroes, setMessage, message }) => {
+const HeroNavbar = () => {
+
   return (
     <Navbar fixed="top" bg="danger nav-color" variant="dark" expand="lg" className='nav-color'>
       <LinkContainer to='/home'>
@@ -21,10 +22,10 @@ const HeroNavbar = ({ setLoading, setUser, user, setSuperheroes, setMessage, mes
           <LinkContainer to="/home">
             <Nav.Link>Equipo</Nav.Link>
           </LinkContainer>
-          <Search user={user} setLoading={setLoading} setSuperheroes={setSuperheroes} setMessage={setMessage} message={message}/>
+          <Search />
         </Nav>
 
-        <LogoutButton setUser={setUser}/>
+        <LogoutButton />
 
       </Navbar.Collapse>
     </Navbar>

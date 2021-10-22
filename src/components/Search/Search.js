@@ -1,11 +1,15 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Form, FormControl, Button } from 'react-bootstrap'
-import heroesService from '../../services/heroes'
+
 import { Formik } from 'formik'
 import * as yup from 'yup'
+// import { setNotification } from '../../reducers/notificationReducer'
+import { useDispatch } from 'react-redux'
+import { searchSuperheroes } from '../../reducers/superheroesReducer'
+import { initializeEmptySuperheroes } from '../../reducers/superheroesReducer'
 
-const Search = ( { setSuperheroes, setLoading, setMessage }) => {
+const Search = () => {
 
   const schema = yup.object().shape({
     search: yup.string()
@@ -14,24 +18,12 @@ const Search = ( { setSuperheroes, setLoading, setMessage }) => {
   })
 
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const handleSearch = (values) => {
     history.push('/heroes')
-    setLoading(true)
-    heroesService
-      .getHeroes(values.search)
-      .then(data => {
-        console.log(data)
-        setSuperheroes(data.results)
-        setLoading(false)
-        setMessage(data.response)
-        setTimeout(() => {
-          setMessage(null)
-        }, 4000)
-      })
-      .catch(error => {
-        console.log('Error | ', error)
-      })
+    dispatch(initializeEmptySuperheroes())
+    dispatch(searchSuperheroes(values.search))
   }
 
   return (

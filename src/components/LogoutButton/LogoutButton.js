@@ -4,12 +4,11 @@ import { logout } from '../../reducers/loginReducer'
 import { useDispatch } from 'react-redux'
 
 
-const LogoutButton = ( { setUser }) => {
+const LogoutButton = () => {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
     dispatch(logout())
-    setUser(null)
   }
   return (
 

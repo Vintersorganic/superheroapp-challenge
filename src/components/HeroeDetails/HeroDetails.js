@@ -1,33 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 import { Container, Row, Col, Image, Table } from 'react-bootstrap'
-import heroesService from '../../services/heroes'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router'
 
-const HeroeDetails = ({ setLoading, loading }) => {
-  const id = useParams().id
-  const [heroDetails, setHeroDetails] = useState([])
 
-  useEffect(() => {
-    setLoading(true)
-    heroesService
-      .getIndividualHeroe(id)
-      .then((data) => {
-        setHeroDetails(data)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [setLoading, id])
+const HeroDetails = () => {
+  const heroDetails = useSelector(state => state.superheroes)
+  const loading = useSelector(state => state.loading)
 
   if (loading) {
     return <LoadingSpinner />
   }
 
   else if (heroDetails.length < 1) {
-    return null
+    return <Redirect to='/home' />
   }
-
 
   return (
     <Container style={{ marginTop:100 }}>
@@ -73,6 +61,6 @@ const HeroeDetails = ({ setLoading, loading }) => {
 
 
 
-export default HeroeDetails
+export default HeroDetails
 
 

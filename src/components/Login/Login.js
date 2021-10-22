@@ -7,12 +7,13 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { login } from '../../reducers/loginReducer'
-
 import './login.css'
+import { useSelector } from 'react-redux'
 
-const Login = ( { message }) => {
+const Login = () => {
   const history = useHistory()
   const dispatch = useDispatch()
+  const message = useSelector(state => state.message)
 
   const handleLogin = (credentials) => {
     dispatch(login(credentials))

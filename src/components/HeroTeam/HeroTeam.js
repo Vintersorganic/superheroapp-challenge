@@ -2,13 +2,22 @@ import React from 'react'
 import { Row, Col, Card, ListGroupItem, Button, ListGroup, ButtonGroup } from 'react-bootstrap'
 import './heroteam.css'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteHero } from '../../reducers/heroteamReducer'
+import { superheroDetail, initializeEmptySuperheroes } from '../../reducers/superheroesReducer'
 
-const HeroTeam = ({ teamHeroes, setTeamHeroes }) => {
+const HeroTeam = () => {
 
-  const deleteHeroes = (id) => {
+  const teamHeroes = useSelector(state => state.teamheroes)
+  const dispatch = useDispatch()
 
-    const updatedHeroesTeam = teamHeroes.filter(teamHeroe => teamHeroe.id !== id )
-    setTeamHeroes(updatedHeroesTeam)
+  const handleDeleteHeroes = (id) => {
+    dispatch(deleteHero(id))
+  }
+
+  const handleHeroDetail = (id) => {
+    dispatch(initializeEmptySuperheroes())
+    dispatch(superheroDetail(id))
   }
 
   if (teamHeroes.length < 1) {
@@ -18,48 +27,48 @@ const HeroTeam = ({ teamHeroes, setTeamHeroes }) => {
   return (
     <div >
       <Row xs={1} md={2} lg={6} className="card-row mb-3" style={{ margin: 'auto'  }}>
-        {teamHeroes.map(superheroe => {
+        {teamHeroes.map(superhero => {
           return  (
-            <Col xs={12} sm={6} md={4} lg={2}  key={Number(superheroe.id)}>
-              <Card border={superheroe.biography.alignment === 'good' ? 'success' : 'danger'} className="mt-2 single-card" >
-                <Card.Header className='text-center font-weight-bold'>{superheroe.name}</Card.Header>
-                <Card.Img variant='top' src={superheroe.image.url} className="card-img"/>
+            <Col xs={12} sm={6} md={4} lg={2}  key={Number(superhero.id)}>
+              <Card border={superhero.biography.alignment === 'good' ? 'success' : 'danger'} className="mt-2 single-card" >
+                <Card.Header className='text-center font-weight-bold'>{superhero.name}</Card.Header>
+                <Card.Img variant='top' src={superhero.image.url} className="card-img"/>
                 <ListGroup className="list-group-flush">
                   <ListGroupItem>
-                    <strong>Combate:</strong> { superheroe.powerstats.combat !== 'null' ?
-                      superheroe.powerstats.combat : '?'
+                    <strong>Combate:</strong> { superhero.powerstats.combat !== 'null' ?
+                      superhero.powerstats.combat : '?'
                     }
                   </ListGroupItem>
                   <ListGroupItem>
-                    <strong>Resistencia:</strong> { superheroe.powerstats.durability !== 'null' ?
-                      superheroe.powerstats.durability : '?'
+                    <strong>Resistencia:</strong> { superhero.powerstats.durability !== 'null' ?
+                      superhero.powerstats.durability : '?'
                     }
                   </ListGroupItem>
                   <ListGroupItem>
-                    <strong>Inteligencia:</strong> { superheroe.powerstats.intelligence !== 'null' ?
-                      superheroe.powerstats.intelligence : '?'
+                    <strong>Inteligencia:</strong> { superhero.powerstats.intelligence !== 'null' ?
+                      superhero.powerstats.intelligence : '?'
                     }
                   </ListGroupItem>
                   <ListGroupItem>
-                    <strong>Poder:</strong> { superheroe.powerstats.power !== 'null' ?
-                      superheroe.powerstats.power : '?'
+                    <strong>Poder:</strong> { superhero.powerstats.power !== 'null' ?
+                      superhero.powerstats.power : '?'
                     }
                   </ListGroupItem>
                   <ListGroupItem>
-                    <strong>Velocidad:</strong> { superheroe.powerstats.speed !== 'null' ?
-                      superheroe.powerstats.speed : '?'
+                    <strong>Velocidad:</strong> { superhero.powerstats.speed !== 'null' ?
+                      superhero.powerstats.speed : '?'
                     }
                   </ListGroupItem>
                   <ListGroupItem>
-                    <strong>Fuerza:</strong> { superheroe.powerstats.strength !== 'null' ?
-                      superheroe.powerstats.strength : '?'
+                    <strong>Fuerza:</strong> { superhero.powerstats.strength !== 'null' ?
+                      superhero.powerstats.strength : '?'
                     }
                   </ListGroupItem>
                 </ListGroup>
                 <ButtonGroup>
-                  <Button variant="outline-info" onClick={() => deleteHeroes(superheroe.id)}>Eliminar</Button>
-                  <LinkContainer to={`/heroes/${superheroe.id}`}>
-                    <Button variant="outline-info">Detalles</Button>
+                  <Button variant="outline-info" onClick={() => handleDeleteHeroes(superhero.id)}>Eliminar</Button>
+                  <LinkContainer to={`/heroes/${superhero.id}`}>
+                    <Button variant="outline-info" onClick={() => handleHeroDetail(superhero.id)}>Detalles</Button>
                   </LinkContainer>
                 </ButtonGroup>
               </Card>
