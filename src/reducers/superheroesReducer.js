@@ -34,11 +34,9 @@ export const searchSuperheroes = (value) => {
 }
 
 export const initializeEmptySuperheroes = () => {
-  return async dispatch => {
-    dispatch({
-      type: 'EMPTY_SUPERHEROES',
-      data: []
-    })
+  return {
+    type: 'EMPTY_SUPERHEROES',
+    data: []
   }
 }
 

@@ -2,29 +2,23 @@
 const loadingReducer = (state = false, action) => {
   switch (action.type) {
   case 'SET_LOADING_TRUE':
-    return action.data
+    return true
   case 'SET_LOADING_FALSE':
-    return action.data
+    return false
   default:
     return state
   }
 }
 
 export const setLoadingTrue = () => {
-  return async dispatch => {
-    dispatch({
-      type: 'SET_LOADING_TRUE',
-      data: true
-    })
+  return {
+    type: 'SET_LOADING_TRUE'
   }
 }
 
 export const setLoadingFalse = () => {
-  return async dispatch => {
-    dispatch({
-      type: 'SET_LOADING_FALSE',
-      data: false
-    })
+  return {
+    type: 'SET_LOADING_FALSE'
   }
 }
 

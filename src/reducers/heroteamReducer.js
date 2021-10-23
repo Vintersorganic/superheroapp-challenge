@@ -12,20 +12,16 @@ const heroteamReducer = (state = [], action) => {
 }
 
 export const addHero = hero => {
-  return async dispatch => {
-    dispatch({
-      type: 'ADD_HERO',
-      data: hero
-    })
+  return  {
+    type: 'ADD_HERO',
+    data: hero
   }
 }
 
 export const deleteHero = id => {
-  return async dispatch => {
-    dispatch({
-      type: 'DELETE_HERO',
-      data: id
-    })
+  return {
+    type: 'DELETE_HERO',
+    data: id
   }
 }
 
