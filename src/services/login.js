@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://challenge-react.alkemy.org/'
+const baseUrl = 'https://restserver-node-jgdp.herokuapp.com/api/auth/login'
 
 const login = async credentials => {
   const response = await axios.post(baseUrl, credentials)
