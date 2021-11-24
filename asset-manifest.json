@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/superheroapp-challenge/static/css/main.ebdd9eca.chunk.css",
-    "main.js": "/superheroapp-challenge/static/js/main.25d9bc77.chunk.js",
-    "main.js.map": "/superheroapp-challenge/static/js/main.25d9bc77.chunk.js.map",
+    "main.css": "/superheroapp-challenge/static/css/main.eb7d81f1.chunk.css",
+    "main.js": "/superheroapp-challenge/static/js/main.53f6b8a1.chunk.js",
+    "main.js.map": "/superheroapp-challenge/static/js/main.53f6b8a1.chunk.js.map",
     "runtime-main.js": "/superheroapp-challenge/static/js/runtime-main.45365968.js",
     "runtime-main.js.map": "/superheroapp-challenge/static/js/runtime-main.45365968.js.map",
-    "static/js/2.22c3cffe.chunk.js": "/superheroapp-challenge/static/js/2.22c3cffe.chunk.js",
-    "static/js/2.22c3cffe.chunk.js.map": "/superheroapp-challenge/static/js/2.22c3cffe.chunk.js.map",
+    "static/js/2.611da4aa.chunk.js": "/superheroapp-challenge/static/js/2.611da4aa.chunk.js",
+    "static/js/2.611da4aa.chunk.js.map": "/superheroapp-challenge/static/js/2.611da4aa.chunk.js.map",
     "index.html": "/superheroapp-challenge/index.html",
-    "static/css/main.ebdd9eca.chunk.css.map": "/superheroapp-challenge/static/css/main.ebdd9eca.chunk.css.map",
-    "static/js/2.22c3cffe.chunk.js.LICENSE.txt": "/superheroapp-challenge/static/js/2.22c3cffe.chunk.js.LICENSE.txt",
+    "static/css/main.eb7d81f1.chunk.css.map": "/superheroapp-challenge/static/css/main.eb7d81f1.chunk.css.map",
+    "static/js/2.611da4aa.chunk.js.LICENSE.txt": "/superheroapp-challenge/static/js/2.611da4aa.chunk.js.LICENSE.txt",
     "static/media/login-icon2.3966a311.png": "/superheroapp-challenge/static/media/login-icon2.3966a311.png",
     "static/media/superheroes-6.489878d4.png": "/superheroapp-challenge/static/media/superheroes-6.489878d4.png"
   },
   "entrypoints": [
     "static/js/runtime-main.45365968.js",
-    "static/js/2.22c3cffe.chunk.js",
-    "static/css/main.ebdd9eca.chunk.css",
-    "static/js/main.25d9bc77.chunk.js"
+    "static/js/2.611da4aa.chunk.js",
+    "static/css/main.eb7d81f1.chunk.css",
+    "static/js/main.53f6b8a1.chunk.js"
   ]
 }
